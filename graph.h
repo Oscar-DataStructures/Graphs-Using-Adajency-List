@@ -15,6 +15,22 @@ Project 8
 
 using namespace std;
 
+
+template <class KeyType>
+class vertex
+{
+	public:
+		vertex();
+		vertex(const vertex<KeyType>& g);
+		~vertex();
+
+	private:
+		vector<KeyType> edgeSet;
+		vector<KeyType> nodeSet;
+
+};
+
+
 template <class KeyType>
 class graph
 {
