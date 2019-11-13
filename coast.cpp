@@ -1,5 +1,5 @@
 /*
-Oscar Martinez
+Oscar Martinez, Xinduo Fan
 CS 271
 Dr. Lall
 Project 8
@@ -10,6 +10,6 @@ Project 8
 // =============================================================================
 int main()
 {
-  
+
 	return 0;
 }

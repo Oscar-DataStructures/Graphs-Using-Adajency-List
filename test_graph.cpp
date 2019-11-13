@@ -1,5 +1,5 @@
 /*
-Oscar Martinez
+Oscar Martinez, Xinduo Fan
 CS 271
 Dr. Lall
 Project 8
@@ -15,7 +15,43 @@ Project 8
 // ======================= Test Default Constructor Method =====================
 void test_defaultConstructor()
 {
+	graph a("test.txt");
+	a.dfs();
+	// a.display_adjMatrix();
+	//a.display_adjList();
+	// a.display_colors();
 
+	graph b(a);
+}
+
+
+// ======================= Test Default Constructor Method =====================
+void test_copyConstructor()
+{
+	graph a("test.txt");
+	// a.display_adjMatrix();
+	// a.display_adjList();
+	// a.display_colors();
+
+	graph b(a);
+	// b.display_adjMatrix();
+	// b.display_adjList();
+	// b.display_colors();
+}
+
+
+// ======================= Test Default Constructor Method =====================
+void test_assignmentOp()
+{
+	graph a("test.txt");
+	// a.display_adjMatrix();
+	// a.display_adjList();
+	// a.display_colors();
+
+	graph b = a;
+	// b.display_adjMatrix();
+	// b.display_adjList();
+	// b.display_colors();
 }
 
 
@@ -24,7 +60,11 @@ void test_defaultConstructor()
 int main()
 {
 	test_defaultConstructor();
-	cout << "Default Constructor Test	|Passed|" << endl;
+	std::cout << "Default Constructor Test	|Passed|" << std::endl;
+	test_copyConstructor();
+	std::cout << "Copy Constructor Test		|Passed|" << std::endl;
+	test_assignmentOp();
+	std::cout << "AssignmentOp  Test		|Passed|" << std::endl;
 
 	return 0;
 }

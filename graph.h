@@ -1,9 +1,10 @@
 /*
-Oscar Martinez
+Oscar Martinez, Xinduo Fan
 CS 271
 Dr. Lall
 Project 8
 */
+
 
 #ifndef _graph_h
 #define _graph_h
@@ -12,39 +13,42 @@ Project 8
 #include <string>
 #include <cmath>
 #include <sstream>
+#include <map>
+#include <vector>
 
 using namespace std;
 
-
-template <class KeyType>
-class vertex
-{
-	public:
-		vertex();
-		vertex(const vertex<KeyType>& g);
-		~vertex();
-
-	private:
-		vector<KeyType> edgeSet;
-		vector<KeyType> nodeSet;
-
-};
+enum Color {WHITE, GRAY, BLACK};	//0 = white, 1 = gray, 2 = black
 
 
-template <class KeyType>
 class graph
 {
 	public:
-		graph(string filename);
-		graph(const graph<KeyType>& g);
+		graph(std::string filename);		//making an adjacency list/matrix as datatype
+		graph(const graph& g);
 		~graph();
 
 
 		void dfs();
 		void topologicalsort();
 
-		graph& operator=(const graph<KeyType>& g);   //sets this table equal to the assigned h's table
+		void display_colors();		//TODO turn to string
+		void display_adjList();		//TODO turn to string
+		void display_adjMatrix();		//TODO turn to string
 
+		graph& operator=(const graph& g);   //sets this table equal to the assigned h's table
+
+	private:
+		std::vector<int> colors;		//make a std::vector to hold the color of n things
+		int numVertices;
+
+		void constructAdjMatrix(std::string filename);
+		void constructAdjList();
+
+		std::string removeWhiteSpaces(std::string line);
+
+		std::map<int, std::vector<int>> adjList;
+		std::vector<std::vector<int>> adjMatrix;
 };
 
 
