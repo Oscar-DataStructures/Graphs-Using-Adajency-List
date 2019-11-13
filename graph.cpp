@@ -57,18 +57,20 @@ void graph::dfs()
   colors[0] = GRAY;
   processStack.push(0);
   int j = 0;
-  cout << "Order of Processed Vertices: ";
+  //cout << "Order of Processed Vertices: ";
   while(processStack.empty() != true)   //while stack is not empty
   {
     int vecLen = adjList.at(j).size();    //gets size of vector at key j
     int u = processStack.top();   //returns top element
     processStack.pop();   //pops top element
-    for(int i; i < vecLen; i++)
+    cout << "\nLength of the vector:" <<vecLen << endl;
+    for(int i = 0; i < vecLen; i++)
     {
       int v = adjList.at(j)[i];   //get the vertex at j
+      cout << "Vertex: " << v << endl;
       if(colors[v] == WHITE)    //if vertex is white
       {
-        cout << "Test" << endl;
+        //cout << "Test" << endl;
         processStack.push(v);   //add vertex to stack
         colors[v] = GRAY;   //color vertex gray
       }
@@ -76,7 +78,7 @@ void graph::dfs()
 
     colors[u] = BLACK;    //once no more neighbors we color black
     j++;    //iterator variable increment
-    cout << u << " ";   //cout the order vertices are processed
+    cout << "Processed Vertex: " <<u << " ";   //cout the order vertices are processed
   }
   cout << "\n" << endl;
 }
@@ -84,6 +86,16 @@ void graph::dfs()
 
 // ============================ Topological Sort Method ========================
 void graph::topologicalsort()
+//Preconditions:  N/A
+//Postcondition:  N/A
+{
+  std::vector<int> inDegree = countInDegree();
+
+}
+
+
+// ============================= Count In Degree Method ========================
+std::vector<int> graph::countInDegree()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
@@ -160,7 +172,7 @@ void graph::constructAdjMatrix(std::string filename)
 
   if (!inFile)    //file opening failed
   {
-    std::cerr << "Unable to open file";
+    std::cerr << "Unable to open file"; //FIX, always outputs
     exit(1);
   }
 

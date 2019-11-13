@@ -29,12 +29,14 @@ class graph
 		~graph();
 
 
-		void dfs();		//TODO: FIX
+		void dfs();		//TODO: potentially add so that it visits in small to large
 		void topologicalsort();
+		std::vector<int> countInDegree();
 
 		void display_colors();		//TODO turn to string
 		void display_adjList();		//TODO turn to string
 		void display_adjMatrix();		//TODO turn to string
+
 
 		graph& operator=(const graph& g);   //sets this table equal to the assigned h's table
 
