@@ -5,7 +5,7 @@ Dr. Lall
 Project 8
 */
 
-
+#include <bits/stdc++.h>
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -53,34 +53,13 @@ void graph::dfs()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  stack<int> processStack;
-  colors[0] = GRAY;
-  processStack.push(0);
-  int j = 0;
-  //cout << "Order of Processed Vertices: ";
-  while(processStack.empty() != true)   //while stack is not empty
+  for(int i = 0; i < numVertices; i++)
   {
-    int vecLen = adjList.at(j).size();    //gets size of vector at key j
-    int u = processStack.top();   //returns top element
-    processStack.pop();   //pops top element
-    cout << "\nLength of the vector:" <<vecLen << endl;
-    for(int i = 0; i < vecLen; i++)
+    if (colors[i] == WHITE)
     {
-      int v = adjList.at(j)[i];   //get the vertex at j
-      cout << "Vertex: " << v << endl;
-      if(colors[v] == WHITE)    //if vertex is white
-      {
-        //cout << "Test" << endl;
-        processStack.push(v);   //add vertex to stack
-        colors[v] = GRAY;   //color vertex gray
-      }
+      dfsNonRecursive(i);
     }
-
-    colors[u] = BLACK;    //once no more neighbors we color black
-    j++;    //iterator variable increment
-    cout << "Processed Vertex: " <<u << " ";   //cout the order vertices are processed
   }
-  cout << "\n" << endl;
 }
 
 
@@ -90,6 +69,7 @@ void graph::topologicalsort()
 //Postcondition:  N/A
 {
   std::vector<int> inDegree = countInDegree();
+  //for()
 
 }
 
@@ -99,7 +79,19 @@ std::vector<int> graph::countInDegree()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  vector<int> countInD;
+  for(int i =0; i < numVertices; i++)
+  {
+    vector<int> keyVec = adjList.at(i);
+    int inDegreeCount = 0;
+    for(int j = 0; j < keyVec.size(); j++)
+    {
+      inDegreeCount += count(keyVec.begin(), keyVec.end(), i);
+    }
+    countInD.push_back(inDegreeCount);
+  }
 
+  return countInD;
 }
 
 
@@ -234,4 +226,40 @@ string graph::removeWhiteSpaces(std::string line)
   }
 
   return result;
+}
+
+
+// ========================== DFS NonRecursive Method =========================
+void graph::dfsNonRecursive(int vertex)
+//Preconditions:  N/A
+//Postcondition:  N/A
+{
+  stack<int> processStack;
+  colors[vertex] = GRAY;
+  processStack.push(vertex);
+  int j = 0;
+  //cout << "Order of Processed Vertices: ";
+  while(processStack.empty() != true)   //while stack is not empty
+  {
+    int vecLen = adjList.at(j).size();    //gets size of vector at key j
+    int u = processStack.top();   //returns top element
+    processStack.pop();   //pops top element
+    cout << "\nLength of the vector:" <<vecLen << endl;
+    for(int i = 0; i < vecLen; i++)
+    {
+      int v = adjList.at(j)[i];   //get the vertex at j
+      cout << "Vertex: " << v << endl;
+      if(colors[v] == WHITE)    //if vertex is white
+      {
+        //cout << "Test" << endl;
+        processStack.push(v);   //add vertex to stack
+        colors[v] = GRAY;   //color vertex gray
+      }
+    }
+
+    colors[u] = BLACK;    //once no more neighbors we color black
+    j++;    //iterator variable increment
+    cout << "Processed Vertex: " <<u << " ";   //cout the order vertices are processed
+  }
+  cout << "\n" << endl;
 }

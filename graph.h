@@ -48,6 +48,7 @@ class graph
 		void constructAdjList();
 
 		std::string removeWhiteSpaces(std::string line);
+		void dfsNonRecursive(int vertex);
 
 		std::map<int, std::vector<int>> adjList;
 		std::vector<std::vector<int>> adjMatrix;
