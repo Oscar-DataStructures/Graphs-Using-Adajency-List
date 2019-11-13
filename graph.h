@@ -29,7 +29,7 @@ class graph
 		~graph();
 
 
-		void dfs();
+		void dfs();		//TODO: FIX
 		void topologicalsort();
 
 		void display_colors();		//TODO turn to string

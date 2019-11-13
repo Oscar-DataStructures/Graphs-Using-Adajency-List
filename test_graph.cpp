@@ -15,7 +15,7 @@ Project 8
 // ======================= Test Default Constructor Method =====================
 void test_defaultConstructor()
 {
-	graph a("test.txt");
+	graph a("testDirected.txt");
 	a.dfs();
 	// a.display_adjMatrix();
 	//a.display_adjList();
