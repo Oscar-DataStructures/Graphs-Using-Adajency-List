@@ -58,25 +58,25 @@ void graph::dfs()
   processStack.push(0);
   int j = 0;
   cout << "Order of Processed Vertices: ";
-  while(processStack.empty() != true)
+  while(processStack.empty() != true)   //while stack is not empty
   {
-    int vecLen = adjList.at(j).size();
-    int u = processStack.top();
-    processStack.pop();
+    int vecLen = adjList.at(j).size();    //gets size of vector at key j
+    int u = processStack.top();   //returns top element
+    processStack.pop();   //pops top element
     for(int i; i < vecLen; i++)
     {
-      int v = adjList.at(j)[i];
-      if(colors[v] == WHITE)
+      int v = adjList.at(j)[i];   //get the vertex at j
+      if(colors[v] == WHITE)    //if vertex is white
       {
         cout << "Test" << endl;
-        processStack.push(v);
-        colors[v] = GRAY;
+        processStack.push(v);   //add vertex to stack
+        colors[v] = GRAY;   //color vertex gray
       }
     }
 
-    colors[u] = BLACK;
-    j++;
-    cout << u << " ";
+    colors[u] = BLACK;    //once no more neighbors we color black
+    j++;    //iterator variable increment
+    cout << u << " ";   //cout the order vertices are processed
   }
   cout << "\n" << endl;
 }
@@ -198,7 +198,7 @@ void graph::constructAdjList()
     {
       if(adjMatrix[i][j] != 0)    //we dont care about 0 weight bc no connection
       {
-       result.push_back(j);   //pushes vertix not weight
+       result.push_back(j);   //pushes vertex not weight
       }
     }
     adjList[i] = result;
