@@ -14,7 +14,7 @@ Project 8
 #include <map>
 #include <vector>
 #include <stack>
-#include <queue> 
+#include <queue>
 
 using namespace std;
 
@@ -68,6 +68,7 @@ void graph::dfs()
       int v = adjList.at(j)[i];
       if(colors[v] == WHITE)
       {
+        cout << "Test" << endl;
         processStack.push(v);
         colors[v] = GRAY;
       }
@@ -174,7 +175,7 @@ void graph::constructAdjMatrix(std::string filename)
 
     for(int j = 0; j < line.length(); j++)
     {
-      int intResult = line[j] - '0';
+      int intResult = line[j] - '0';    //turn a char to an int
       adjMatrix[i].push_back(intResult);
     }
   }

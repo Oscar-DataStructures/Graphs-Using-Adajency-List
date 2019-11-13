@@ -15,11 +15,10 @@ Project 8
 // ======================= Test Default Constructor Method =====================
 void test_defaultConstructor()
 {
-	
-	graph a("testDirected.txt");
+	graph a("testUndirected.txt");
 	a.dfs();
 	// a.display_adjMatrix();
-	//a.display_adjList();
+	// a.display_adjList();
 	// a.display_colors();
 
 	graph b(a);
