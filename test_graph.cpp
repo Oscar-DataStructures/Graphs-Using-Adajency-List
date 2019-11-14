@@ -62,6 +62,12 @@ void test_dfs()
 }
 
 
+void test_sort()
+{
+	graph a("testDirected.txt");
+	a.topologicalsort();
+}
+
 // ==================================== Main ===================================
 // =============================================================================
 int main()
@@ -73,5 +79,6 @@ int main()
 	test_assignmentOp();
 	std::cout << "AssignmentOp  Test		|Passed|" << std::endl;
 	test_dfs();
+	test_sort();
 	return 0;
 }

@@ -70,16 +70,28 @@ void graph::topologicalsort()
 {
   std::vector<int> inDegree = countInDegree();
   queue<int> processQueue;
-  int i = 0;
-  while( inDegree[i] != 0) i++;
-  processQueue.push(i);
+  int vertex = 0;
+  while( (inDegree[vertex] != 0) && (vertex < inDegree.size()) )vertex++;     //find an vertex having in-degree 0
+  if (vertex >= inDegree.size())
+  {
+    cout<< "cycle detected"<<endl;
+    exit(1);
+  }
+  processQueue.push(vertex);
+  cout << "The topological order of this graph is:";
   while ( !processQueue.empty() )
   {
-    int node = processQueue.front();
+    vertex = processQueue.front();
     processQueue.pop();
-
+    cout << vertex << " ";
+    for (int i = 0; i < adjList.at(vertex).size(); i++ )
+    {
+      int document_vertex = adjList.at(vertex)[i];
+      inDegree[document_vertex] --;     //= adjMatrix[vertex][document_vertex];
+      if ( inDegree[document_vertex] == 0 ) processQueue.push(document_vertex);
+    }
   }
-
+  cout <<"\n";  
 }
 
 
@@ -89,18 +101,17 @@ std::vector<int> graph::countInDegree()
 //Postcondition:  N/A
 {
   vector<int> countInD;
+  for(int i =0; i < numVertices; i++) countInD.push_back(0);
   for(int i =0; i < numVertices; i++)
   {
     vector<int> keyVec = adjList.at(i);
-    int inDegreeCount = 0;
     for(int j = 0; j < keyVec.size(); j++)
     {
-      inDegreeCount += count(keyVec.begin(), keyVec.end(), i);
+      countInD[keyVec[j]]++;
     }
-    countInD.push_back(inDegreeCount);
   }
-
   return countInD;
+  
 }
 
 
