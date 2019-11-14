@@ -5,7 +5,7 @@ Dr. Lall
 Project 8
 */
 
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -69,7 +69,16 @@ void graph::topologicalsort()
 //Postcondition:  N/A
 {
   std::vector<int> inDegree = countInDegree();
-  //for()
+  queue<int> processQueue;
+  int i = 0;
+  while( inDegree[i] != 0) i++;
+  processQueue.push(i);
+  while ( !processQueue.empty() )
+  {
+    int node = processQueue.front();
+    processQueue.pop();
+
+  }
 
 }
 
@@ -198,7 +207,7 @@ void graph::constructAdjList()
   {
     adjList[i];   //populate keys
     std::vector<int> result;
-    for (int j = (adjMatrix[i].size()-1); j >=0 ; j++)
+    for (int j = 0; j <(adjMatrix[i].size()) ; j++)
     {
       if(adjMatrix[i][j] != 0)    //we dont care about 0 weight bc no connection
       {
@@ -237,18 +246,18 @@ void graph::dfsNonRecursive(int vertex)
   stack<int> processStack;
   colors[vertex] = GRAY;
   processStack.push(vertex);
-  int j = 0;
-  //cout << "Order of Processed Vertices: ";
+  //int j = 0;
+  cout << "Order of Processed Vertices: ";
   while(processStack.empty() != true)   //while stack is not empty
   {
-    int vecLen = adjList.at(j).size();    //gets size of vector at key j
-    int u = processStack.top();   //returns top element
+    int u = processStack.top();       //returns top element
     processStack.pop();   //pops top element
-    cout << "\nLength of the vector:" <<vecLen << endl;
+    int vecLen = adjList.at(u).size();    //gets size of vector at key j
+    //cout << "\nLength of the vector:" <<vecLen << endl;
     for(int i = 0; i < vecLen; i++)
     {
-      int v = adjList.at(j)[i];   //get the vertex at j
-      cout << "Vertex: " << v << endl;
+      int v = adjList.at(u)[i];   //get the vertex at u
+      //cout << "Vertex: " << v << endl;
       if(colors[v] == WHITE)    //if vertex is white
       {
         //cout << "Test" << endl;
@@ -258,8 +267,8 @@ void graph::dfsNonRecursive(int vertex)
     }
 
     colors[u] = BLACK;    //once no more neighbors we color black
-    j++;    //iterator variable increment
-    cout << "Processed Vertex: " <<u << " ";   //cout the order vertices are processed
+    // j++;    //iterator variable increment
+    cout <<u << " ";   //cout the order vertices are processed
   }
   cout << "\n" << endl;
 }

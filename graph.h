@@ -50,8 +50,8 @@ class graph
 		std::string removeWhiteSpaces(std::string line);
 		void dfsNonRecursive(int vertex);
 
-		std::map<int, std::vector<int>> adjList;
-		std::vector<std::vector<int>> adjMatrix;
+		std::map<int, std::vector<int> > adjList;
+		std::vector<std::vector<int> > adjMatrix;
 };
 
 

@@ -17,9 +17,9 @@ void test_defaultConstructor()
 {
 	graph a("testDirected.txt");
 	//a.dfs();
-	// a.display_adjMatrix();
-	// a.display_adjList();
-	// a.display_colors();
+	 a.display_adjMatrix();
+	 a.display_adjList();
+	 a.display_colors();
 
 	graph b(a);
 }
@@ -28,7 +28,7 @@ void test_defaultConstructor()
 // ======================= Test Default Constructor Method =====================
 void test_copyConstructor()
 {
-	graph a("test.txt");
+	graph a("testDirected.txt");
 	// a.display_adjMatrix();
 	// a.display_adjList();
 	// a.display_colors();
@@ -43,7 +43,7 @@ void test_copyConstructor()
 // ======================= Test Default Constructor Method =====================
 void test_assignmentOp()
 {
-	graph a("test.txt");
+	graph a("testDirected.txt");
 	// a.display_adjMatrix();
 	// a.display_adjList();
 	// a.display_colors();
@@ -52,6 +52,13 @@ void test_assignmentOp()
 	// b.display_adjMatrix();
 	// b.display_adjList();
 	// b.display_colors();
+}
+
+
+void test_dfs()
+{
+	graph a("testDirected.txt");
+	a.dfs();
 }
 
 
@@ -65,6 +72,6 @@ int main()
 	std::cout << "Copy Constructor Test		|Passed|" << std::endl;
 	test_assignmentOp();
 	std::cout << "AssignmentOp  Test		|Passed|" << std::endl;
-
+	test_dfs();
 	return 0;
 }
