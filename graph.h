@@ -29,7 +29,7 @@ class graph
 		~graph();
 
 
-		void dfs();		//TODO: potentially add so that it visits in small to large
+		void dfs();		//it visits in small to large by changing the order of the adjList
 		void topologicalsort();
 		std::vector<int> countInDegree();
 

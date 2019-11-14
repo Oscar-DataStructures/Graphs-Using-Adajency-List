@@ -198,7 +198,7 @@ void graph::constructAdjList()
   {
     adjList[i];   //populate keys
     std::vector<int> result;
-    for (int j = 0; j < adjMatrix[i].size(); j++)
+    for (int j = (adjMatrix[i].size()-1); j >=0 ; j++)
     {
       if(adjMatrix[i][j] != 0)    //we dont care about 0 weight bc no connection
       {
