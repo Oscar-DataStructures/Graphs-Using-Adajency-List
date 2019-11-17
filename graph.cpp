@@ -279,7 +279,7 @@ void graph::dfsNonRecursive(int vertex)
 
     colors[u] = BLACK;    //once no more neighbors we color black
     // j++;    //iterator variable increment
-    cout <<u << " ";   //cout the order vertices are processed
+    cout << u << " ";   //cout the order vertices are processed
   }
   cout << "\n" << endl;
 }
