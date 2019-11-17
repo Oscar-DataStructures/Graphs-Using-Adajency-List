@@ -17,11 +17,12 @@ coast.o: coast.cpp graph.h graph.cpp
 coast: coast.o
 	g++ -o coast coast.o
 
-countingstars.o: countingstars.cpp graph.h graph.cpp
+countingstars.o: countingstars.cpp 
 	g++ $(CPPOPTIONSS) -c countingstars.cpp
 
 countingstars: countingstars.o
-	g++ -o countingstars test_graph.o
+	g++ -o countingstars countingstars.o
+
 
 
 //==============================================================================

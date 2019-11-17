@@ -101,7 +101,7 @@ std::vector<int> graph::countInDegree()
 //Postcondition:  N/A
 {
   vector<int> countInD;
-  for(int i =0; i < numVertices; i++) countInD.push_back(0);
+  countInD.resize(numVertices,0);
   for(int i =0; i < numVertices; i++)
   {
     vector<int> keyVec = adjList.at(i);
