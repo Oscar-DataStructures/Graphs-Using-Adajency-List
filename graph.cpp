@@ -115,7 +115,7 @@ std::vector<int> graph::countInDegree()
 //Postcondition:  N/A
 {
   vector<int> countInD;
-  for(int i =0; i < numVertices; i++) countInD.push_back(0);
+  countInD.resize(numVertices,0);
   for(int i =0; i < numVertices; i++)
   {
     vector<int> keyVec = adjList.at(i);
@@ -322,7 +322,7 @@ void graph::dfsNonRecursive(int vertex)
 
     colors[u] = BLACK;    //once no more neighbors we color black
     // j++;    //iterator variable increment
-    cout <<u << " ";   //cout the order vertices are processed
+    cout << u << " ";   //cout the order vertices are processed
   }
   cout << "\n" << endl;
 }
