@@ -21,7 +21,7 @@ using namespace std;
 // ============================== Constructor ==================================
 graph::graph(std::string filename)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  Constructs adjMatrix and adjList
 {
   constructAdjMatrix(filename);   //does error check
   constructAdjList();
@@ -31,8 +31,9 @@ graph::graph(std::string filename)
 // ============================= Copy Constructor ==============================
 graph::graph(const graph& g)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  this will be the same as graph g
 {
+  this->numVertices = g.numVertices;
   this->adjList = g.adjList;
   this->adjMatrix = g.adjMatrix;
   this->colors = g.colors;
@@ -51,7 +52,7 @@ graph::~graph()
 // ============================ Depth First Search Method ======================
 void graph::dfs()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  Will return the order in which vertexs are processed
 {
   for(int i = 0; i < numVertices; i++)
   {
@@ -66,7 +67,7 @@ void graph::dfs()
 // ============================ Topological Sort Method ========================
 string graph::topologicalsort()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  Will detect cycle and output sorted order
 {
   std::vector<int> inDegree = countInDegree();
   queue<int> processQueue;
@@ -75,15 +76,14 @@ string graph::topologicalsort()
   int j = 0;
 
   topSort << "[";
-
   while( (inDegree[vertex] != 0) && (vertex < inDegree.size()) )vertex++;     //find an vertex having in-degree 0
   if (vertex >= inDegree.size())
   {
-    cout<< "cycle detected"<<endl;
-    exit(1);
+    topSort << "cycle detected]";
+    return topSort.str();
   }
   processQueue.push(vertex);
-  //cout << "The topological order of this graph is: ";
+  //cout << "The topological order of this graph is: "; //uncomment to cout instead of assert for visuals
   while ( !processQueue.empty() )
   {
     vertex = processQueue.front();
@@ -112,7 +112,7 @@ string graph::topologicalsort()
 // ============================= Count In Degree Method ========================
 std::vector<int> graph::countInDegree()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  returns a vector of the inDegree count for each vertex
 {
   vector<int> countInD;
   countInD.resize(numVertices,0);
@@ -132,9 +132,9 @@ std::vector<int> graph::countInDegree()
 // ============================ Display Colors  Method =========================
 string graph::display_colors()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  will return string of colors of the vertices
 {
-  //cout << "The colors of this graph is: ";
+  //cout << "The colors of this graph is: "; //uncomment to cout instead of assert for visuals
   ostringstream colorStr;
   int j = 0;
 
@@ -155,9 +155,9 @@ string graph::display_colors()
 // =========================== Display Adjaceny List Method ====================
 string graph::display_adjList()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  returns a string represenation of the adjList
 {
-  //cout << "The Adjancey List of this graph is: ";
+  //cout << "The Adjancey List of this graph is: "; //uncomment to cout instead of assert for visuals
   ostringstream aList;
   int mapKey = 0;
 
@@ -183,9 +183,9 @@ string graph::display_adjList()
 // =========================== Display Adjaceny Matrix Method ==================
 string graph::display_adjMatrix()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  returns a string represenation of the adjMatrix
 {
-  //cout << "The Adjancey Matrix of this graph is: ";
+  //cout << "The Adjancey Matrix of this graph is: "; //uncomment to cout instead of assert for visuals
   ostringstream aMatrix;
 
   aMatrix << "\n";
@@ -206,8 +206,9 @@ string graph::display_adjMatrix()
 // =========================== Assignment Opertor Method =======================
 graph& graph::operator=(const graph& g)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  Sets this to be the same as g
 {
+  this->numVertices = g.numVertices;
   this->adjList = g.adjList;
   this->adjMatrix = g.adjMatrix;
   this->colors = g.colors;
@@ -217,7 +218,7 @@ graph& graph::operator=(const graph& g)
 // ========================== Adjaceny Matrix Constructor ======================
 void graph::constructAdjMatrix(std::string filename)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  Constructs an adjMatrix and does an error check
 {
   std::string vertices;
   std::string line;
@@ -254,7 +255,7 @@ void graph::constructAdjMatrix(std::string filename)
 // =========================== Adjaceny List Constructor =======================
 void graph::constructAdjList()
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  constructs an adjList
 {
 
   for (int i = 0; i < adjMatrix.size(); i++)    //can build list from matrix
@@ -277,7 +278,7 @@ void graph::constructAdjList()
 // ======================== Remove White Spaces Method =========================
 string graph::removeWhiteSpaces(std::string line)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  removes all white spaces from a given line
 {
   string result = "";
   for(char c: line)   //for every char in line
@@ -295,26 +296,26 @@ string graph::removeWhiteSpaces(std::string line)
 // ========================== DFS NonRecursive Method =========================
 void graph::dfsNonRecursive(int vertex)
 //Preconditions:  N/A
-//Postcondition:  N/A
+//Postcondition:  outputs the order in which vertices are processed
 {
   stack<int> processStack;
+
   colors[vertex] = GRAY;
   processStack.push(vertex);
-  //int j = 0;
+
   cout << "Order of Processed Vertices: ";
   while(processStack.empty() != true)   //while stack is not empty
   {
     int u = processStack.top();       //returns top element
     processStack.pop();   //pops top element
     int vecLen = adjList.at(u).size();    //gets size of vector at key j
-    //cout << "\nLength of the vector:" <<vecLen << endl;
+    //cout << "\nLength of the vector:" <<vecLen << endl; //uncomment to cout instead of assert for visuals
     for(int i = 0; i < vecLen; i++)
     {
       int v = adjList.at(u)[i];   //get the vertex at u
-      //cout << "Vertex: " << v << endl;
+      //cout << "Vertex: " << v << endl; //uncomment to cout instead of assert for visuals
       if(colors[v] == WHITE)    //if vertex is white
       {
-        //cout << "Test" << endl;
         processStack.push(v);   //add vertex to stack
         colors[v] = GRAY;   //color vertex gray
       }
