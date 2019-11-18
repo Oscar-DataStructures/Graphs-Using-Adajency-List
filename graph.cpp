@@ -83,7 +83,7 @@ string graph::topologicalsort()
     exit(1);
   }
   processQueue.push(vertex);
-  cout << "The topological order of this graph is: ";
+  //cout << "The topological order of this graph is: ";
   while ( !processQueue.empty() )
   {
     vertex = processQueue.front();
@@ -134,7 +134,7 @@ string graph::display_colors()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  cout << "The colors of this graph is: ";
+  //cout << "The colors of this graph is: ";
   ostringstream colorStr;
   int j = 0;
 
@@ -157,7 +157,7 @@ string graph::display_adjList()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  cout << "The Adjancey List of this graph is: ";
+  //cout << "The Adjancey List of this graph is: ";
   ostringstream aList;
   int mapKey = 0;
 
@@ -185,7 +185,7 @@ string graph::display_adjMatrix()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  cout << "The Adjancey Matrix of this graph is: ";
+  //cout << "The Adjancey Matrix of this graph is: ";
   ostringstream aMatrix;
 
   aMatrix << "\n";

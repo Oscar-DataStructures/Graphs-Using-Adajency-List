@@ -16,21 +16,20 @@ Project 8
 void test_defaultConstructor()
 {
 	graph a("testDirected.txt");
-	a.dfs();
-  cout << a.topologicalsort() << endl;
-	cout << a.display_colors() << endl;
-	cout << a.display_adjList() << endl;
-	cout << a.display_adjList() << endl;
+	assert(a.topologicalsort() == "[0, 1, 2, 3, 4]");
+	assert(a.display_colors() == "[0, 0, 0, 0, 0]");
+	assert(a.display_adjList() == "\n0 : 1, 2\n1 : 2, 3\n2 : 4\n3 : \n4 : ");
+	assert(a.display_adjMatrix() == "\n0 1 2 0 0 \n0 0 5 4 0 \n0 0 0 0 3 \n0 0 0 0 0 \n0 0 0 0 0 \n");
 
 	graph c("testUndirected.txt");
-	c.dfs();
-	//c.topologicalsort(); //test
-  // a.display_adjMatrix();
-  // a.display_adjList();
-	// c.display_adjList();
-  // a.display_colors();
+	// cout << c.display_adjMatrix() << endl;
+	// cout << c.display_adjList() << endl;
+	// cout << c.display_colors() << endl;
+	// assert(c.topologicalsort() == "[0, 1, 2, 3, 4]");
+	// assert(c.display_colors() == "[0, 0, 0, 0, 0]");
+	// assert(c.display_adjList() == "\n0 : 1, 2\n1 : 2, 3\n2 : 4\n3 : \n4 : ");
+	// assert(c.display_adjMatrix() == "\n0 1 2 0 0 \n0 0 5 4 0 \n0 0 0 0 3 \n0 0 0 0 0 \n0 0 0 0 0 \n");
 
-	graph b(a);
 }
 
 
@@ -38,14 +37,21 @@ void test_defaultConstructor()
 void test_copyConstructor()
 {
 	graph a("testDirected.txt");
-	// a.display_adjMatrix();
-	// a.display_adjList();
-	// a.display_colors();
+	assert(a.topologicalsort() == "[0, 1, 2, 3, 4]");
+	assert(a.display_colors() == "[0, 0, 0, 0, 0]");
+	assert(a.display_adjList() == "\n0 : 1, 2\n1 : 2, 3\n2 : 4\n3 : \n4 : ");
+	assert(a.display_adjMatrix() == "\n0 1 2 0 0 \n0 0 5 4 0 \n0 0 0 0 3 \n0 0 0 0 0 \n0 0 0 0 0 \n");
 
+	cout << "HERE" << endl;
 	graph b(a);
-	// b.display_adjMatrix();
-	// b.display_adjList();
-	// b.display_colors();
+	cout << "COPY" << endl;
+	assert(b.topologicalsort() == "[0, 1, 2, 3, 4]");
+	cout << "COPY" << endl;
+	assert(b.display_colors() == "[0, 0, 0, 0, 0]");
+	cout << "COPY" << endl;
+	assert(b.display_adjList() == "\n0 : 1, 2\n1 : 2, 3\n2 : 4\n3 : \n4 : ");
+	cout << "COPY" << endl;
+	assert(b.display_adjMatrix() == "\n0 1 2 0 0 \n0 0 5 4 0 \n0 0 0 0 3 \n0 0 0 0 0 \n0 0 0 0 0 \n");
 }
 
 
