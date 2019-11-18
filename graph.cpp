@@ -5,7 +5,7 @@ Dr. Lall
 Project 8
 */
 
-//#include <bits/stdc++.h>
+
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -64,13 +64,18 @@ void graph::dfs()
 
 
 // ============================ Topological Sort Method ========================
-void graph::topologicalsort()
+string graph::topologicalsort()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
   std::vector<int> inDegree = countInDegree();
   queue<int> processQueue;
+  ostringstream topSort;
   int vertex = 0;
+  int j = 0;
+
+  topSort << "[";
+
   while( (inDegree[vertex] != 0) && (vertex < inDegree.size()) )vertex++;     //find an vertex having in-degree 0
   if (vertex >= inDegree.size())
   {
@@ -78,20 +83,29 @@ void graph::topologicalsort()
     exit(1);
   }
   processQueue.push(vertex);
-  cout << "The topological order of this graph is:";
+  cout << "The topological order of this graph is: ";
   while ( !processQueue.empty() )
   {
     vertex = processQueue.front();
     processQueue.pop();
-    cout << vertex << " ";
+    topSort << vertex;
+    if(j != numVertices - 1) topSort << ", ";
+    j++;
     for (int i = 0; i < adjList.at(vertex).size(); i++ )
     {
       int document_vertex = adjList.at(vertex)[i];
       inDegree[document_vertex] --;     //= adjMatrix[vertex][document_vertex];
-      if ( inDegree[document_vertex] == 0 ) processQueue.push(document_vertex);
+      if ( inDegree[document_vertex] == 0 )
+      {
+        processQueue.push(document_vertex);
+
+      }
+
     }
   }
-  cout <<"\n";  
+  topSort << "]";
+
+  return topSort.str();
 }
 
 
@@ -111,52 +125,81 @@ std::vector<int> graph::countInDegree()
     }
   }
   return countInD;
-  
+
 }
 
 
 // ============================ Display Colors  Method =========================
-void graph::display_colors()
+string graph::display_colors()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
-  for (std::vector<int>::const_iterator i = colors.begin(); i != colors.end(); ++i)
-      std::cout << *i << ' ';
+  cout << "The colors of this graph is: ";
+  ostringstream colorStr;
+  int j = 0;
 
-  cout << "\n" << endl;
+
+  colorStr << "[";
+  for (std::vector<int>::const_iterator i = colors.begin(); i != colors.end(); ++i)
+  {
+    colorStr << *i;
+    if (j != numVertices - 1) colorStr << ", ";
+    j++;
+  }
+
+  colorStr << "]";
+  return colorStr.str();
 }
 
 
 // =========================== Display Adjaceny List Method ====================
-void graph::display_adjList()
+string graph::display_adjList()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  cout << "The Adjancey List of this graph is: ";
+  ostringstream aList;
+  int mapKey = 0;
+
+
   for(auto it = adjList.begin(); it != adjList.end(); ++it)   //https://stackoverflow.com/questions/18362896/printing-the-vector-in-a-map
   {
-    cout << "\n" << it->first << " : ";
+    int j = 0;
+    aList << "\n" << it->first << " : ";
     for(auto it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-      cout << *it2 << " ";
+    {
+      aList << *it2;
+      if (j != adjList.at(mapKey).size() - 1) aList << ", ";
+      j++;
+    }
+    mapKey++;
   }
-    cout << "\n" << endl;
+
+    return aList.str();
 }
 
 
 
 // =========================== Display Adjaceny Matrix Method ==================
-void graph::display_adjMatrix()
+string graph::display_adjMatrix()
 //Preconditions:  N/A
 //Postcondition:  N/A
 {
+  cout << "The Adjancey Matrix of this graph is: ";
+  ostringstream aMatrix;
+
+  aMatrix << "\n";
   for (int i = 0; i < adjMatrix.size(); i++)
   {
     for (int j = 0; j < adjMatrix[i].size(); j++)
     {
-      std::cout << adjMatrix[i][j] << " ";
-    }
+      aMatrix << adjMatrix[i][j] << " ";
 
-    std::cout << std::endl;
+    }
+    aMatrix << "\n";
   }
+
+  return aMatrix.str();
 }
 
 

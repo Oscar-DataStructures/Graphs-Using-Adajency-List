@@ -16,10 +16,19 @@ Project 8
 void test_defaultConstructor()
 {
 	graph a("testDirected.txt");
-	//a.dfs();
-	 a.display_adjMatrix();
-	 a.display_adjList();
-	 a.display_colors();
+	a.dfs();
+  cout << a.topologicalsort() << endl;
+	cout << a.display_colors() << endl;
+	cout << a.display_adjList() << endl;
+	cout << a.display_adjList() << endl;
+
+	graph c("testUndirected.txt");
+	c.dfs();
+	//c.topologicalsort(); //test
+  // a.display_adjMatrix();
+  // a.display_adjList();
+	// c.display_adjList();
+  // a.display_colors();
 
 	graph b(a);
 }
@@ -58,14 +67,14 @@ void test_assignmentOp()
 void test_dfs()
 {
 	graph a("testDirected.txt");
-	a.dfs();
+	// a.dfs();
 }
 
 
 void test_sort()
 {
 	graph a("testDirected.txt");
-	a.topologicalsort();
+	// a.topologicalsort();
 }
 
 // ==================================== Main ===================================
